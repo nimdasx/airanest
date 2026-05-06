@@ -15,7 +15,7 @@ airanest/                            # Satu repo git, beda folder per komponen
 
 | Komponen | Status | Catatan |
 |----------|--------|---------|
-| API (backend) | **Dalam perencanaan** | Tahapan sudah ditulis di `api/TAHAPAN.md`, belum dieksekusi |
+| API (backend) | **Tahap 1 selesai** | Project skeleton & Docker setup sudah jalan |
 | UI (frontend) | **Ditunda** | Dikerjakan setelah API selesai |
 
 ## Keputusan yang Sudah Diambil
@@ -24,7 +24,8 @@ airanest/                            # Satu repo git, beda folder per komponen
 2. **Fitur hapus di server** — per akun, opsional (`delete_from_server`), email tetap bisa dibaca dari lokal
 3. **API dikerjakan duluan**, UI menyusul setelah API stabil
 4. **Semua development dan testing menggunakan `docker-compose.yml`** yang ada di dalam subfolder `api/`
-5. **Tahapan pengerjaan API terdiri dari 9 tahap** (detail di `api/TAHAPAN.md`):
+5. **Storage pakai local filesystem** — MinIO sudah archived/discontinued, pakai Docker volume saja untuk MVP
+6. **Tahapan pengerjaan API terdiri dari 9 tahap** (detail di `api/TAHAPAN.md`):
    - Tahap 1: Project Skeleton & Docker Setup
    - Tahap 2: Database Models & Migrations
    - Tahap 3: Authentication
@@ -37,4 +38,6 @@ airanest/                            # Satu repo git, beda folder per komponen
 
 ## Tahap Terakhir yang Dikerjakan
 
-> Belum ada tahap yang dieksekusi. Selanjutnya mulai dari **Tahap 1**.
+> **Tahap 1 — Project Skeleton & Docker Setup** ✔ selesai
+>
+> Selanjutnya: **Tahap 2 — Database Models & Migrations**

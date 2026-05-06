@@ -16,7 +16,7 @@ Membangun web app email client yang terasa seperti Thunderbird versi web, dengan
 Email yang diambil dari server IMAP di-**ingest** ke database internal, lalu ditampilkan dari sana. Dengan pendekatan ini:
 
 - Email dibaca dari server IMAP secara berkala oleh background worker
-- Setelah diambil, pesan disimpan lokal (database + object storage)
+- Setelah diambil, pesan disimpan lokal (database + filesystem)
 - UI tidak membaca langsung ke server IMAP
 - Status seperti unread/read, starred, archived, dan draft dikelola oleh sistem sendiri
 - User bisa memilih untuk **menghapus email di server** setelah diunduh, sehingga email tetap bisa dibaca dari storage lokal meskipun sudah tidak ada di server
@@ -60,7 +60,7 @@ Email yang diambil dari server IMAP di-**ingest** ke database internal, lalu dit
    v
 [API Repo / Backend Container] -----> [PostgreSQL]
    |                                  [Redis]
-   |                                  [Object Storage]
+   |                                  [Local Storage]
    |
    +---- background jobs ----> IMAP/SMTP servers
 ```
@@ -70,7 +70,7 @@ Email yang diambil dari server IMAP di-**ingest** ke database internal, lalu dit
 - **API**: auth, account management, message storage, search, send mail
 - **Worker**: job polling IMAP, sync email, hapus di server, kirim email, cleanup
 - **Database**: metadata user, akun, pesan, status, audit
-- **Object storage**: attachment dan raw MIME
+- **Local storage**: attachment dan raw MIME (filesystem, bisa diganti S3-compatible nanti)
 - **Redis**: queue / scheduler / cache
 
 ## 5. Rekomendasi stack
@@ -84,14 +84,14 @@ Email yang diambil dari server IMAP di-**ingest** ke database internal, lalu dit
 - **Pydantic**
 - **Python standard library imaplib + smtplib**
 - **Python email package** untuk parsing MIME
-- **MinIO** atau storage lokal untuk attachment
+- **Local filesystem** untuk attachment dan raw MIME (bisa diganti ke S3-compatible storage nanti)
 
 ### Alasan
 - FastAPI cocok untuk API modern yang cepat dibangun
 - Celery Beat cocok untuk job polling berkala
 - Python punya dukungan bawaan untuk IMAP, SMTP, dan parsing email
 - PostgreSQL cocok untuk penyimpanan relasional multi-user
-- MinIO memudahkan nanti kalau mau pindah ke object storage S3-compatible
+- Local filesystem simpel untuk MVP, bisa diganti ke S3-compatible storage nanti
 
 ## UI repo
 - **React**
@@ -134,7 +134,7 @@ Fitur opsional per akun:
 ### Attachment handling
 - Simpan file attachment terpisah dari metadata
 - Jangan simpan attachment besar langsung di row database
-- Simpan pointer ke object storage atau filesystem lokal
+- Simpan pointer ke filesystem lokal (bisa diganti ke S3-compatible storage nanti)
 
 ### Send mail
 Pengiriman email tetap pakai SMTP:
@@ -330,7 +330,6 @@ Pengguna cukup menulis `docker-compose.yml` yang berisi:
 - beat
 - postgres
 - redis
-- minio
 - ui
 
 ## 12. Urutan pengerjaan MVP

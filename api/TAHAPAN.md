@@ -39,7 +39,7 @@ Subfolder `api/` berisi seluruh backend: FastAPI app, Celery worker/beat, migras
   - `beat` (Celery beat, image sama)
   - `postgres` (PostgreSQL 16)
   - `redis` (Redis 7)
-  - `minio` (MinIO untuk object storage)
+  - volume `storage_data` untuk attachment dan raw MIME (local filesystem)
 - Pastikan `docker compose up` berhasil tanpa error
 - Health check endpoint `GET /health`
 
@@ -110,8 +110,8 @@ Subfolder `api/` berisi seluruh backend: FastAPI app, Celery worker/beat, migras
   6. Parse MIME (email package Python)
   7. Cek deduplication (Message-ID header)
   8. Simpan metadata ke `messages`
-  9. Simpan attachment ke MinIO + catat di `attachments`
-  10. Simpan raw MIME ke MinIO
+  9. Simpan attachment ke local storage + catat di `attachments`
+  10. Simpan raw MIME ke local storage
   11. Update `last_uid` dan `uid_validity`
   12. Jika `delete_from_server` aktif:
       - Tandai pesan dengan flag `\Deleted`
@@ -197,7 +197,7 @@ Subfolder `api/` berisi seluruh backend: FastAPI app, Celery worker/beat, migras
 - `REDIS_URL`
 - `SECRET_KEY` (untuk JWT)
 - `ENCRYPTION_KEY` (untuk credential IMAP/SMTP)
-- `MINIO_ENDPOINT`, `MINIO_ACCESS_KEY`, `MINIO_SECRET_KEY`
+- `STORAGE_PATH` (path untuk attachment dan raw MIME)
 
 ### Menjalankan
 ```bash
