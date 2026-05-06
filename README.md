@@ -47,7 +47,8 @@ Response: `{"status":"ok","app":"AiraNest API"}`
 Jalankan test otomatis untuk memastikan semua service berjalan:
 
 ```bash
-./test_tahap1.sh
+./test_tahap1.sh   # Project skeleton & Docker setup
+./test_tahap2.sh   # Database models & migrations
 ```
 
 ### Stop
