@@ -15,7 +15,7 @@ airanest/                            # Satu repo git, beda folder per komponen
 
 | Komponen | Status | Catatan |
 |----------|--------|---------|
-| API (backend) | **Tahap 1 selesai** | Project skeleton & Docker setup sudah jalan |
+| API (backend) | **Tahap 2 selesai** | Database models & migrations sudah jalan |
 | UI (frontend) | **Ditunda** | Dikerjakan setelah API selesai |
 
 ## Keputusan yang Sudah Diambil
@@ -38,6 +38,10 @@ airanest/                            # Satu repo git, beda folder per komponen
 
 ## Tahap Terakhir yang Dikerjakan
 
-> **Tahap 1 — Project Skeleton & Docker Setup** ✔ selesai
+> **Tahap 2 — Database Models & Migrations** ✔ selesai
 >
-> Selanjutnya: **Tahap 2 — Database Models & Migrations**
+> - Models: `users`, `mail_accounts`, `messages`, `attachments`, `sync_logs`
+> - Alembic auto-migration saat container start
+> - Migration hanya dijalankan oleh service `api` (worker/beat skip)
+>
+> Selanjutnya: **Tahap 3 — Authentication**

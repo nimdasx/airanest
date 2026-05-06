@@ -18,10 +18,13 @@ services:
 
   worker:
     build: .
+    entrypoint: []
     command: celery -A app.workers.celery_app worker --loglevel=info
     env_file:
       - .env
     depends_on:
+      api:
+        condition: service_started
       postgres:
         condition: service_healthy
       redis:
@@ -31,10 +34,13 @@ services:
 
   beat:
     build: .
+    entrypoint: []
     command: celery -A app.workers.celery_app beat --loglevel=info
     env_file:
       - .env
     depends_on:
+      api:
+        condition: service_started
       redis:
         condition: service_healthy
 

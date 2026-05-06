@@ -32,6 +32,8 @@ docker compose ps
 
 Harus ada 5 container running: `api`, `worker`, `beat`, `postgres`, `redis`.
 
+Database migration otomatis dijalankan saat container `api` start — tidak perlu manual.
+
 Test health check:
 
 ```bash
