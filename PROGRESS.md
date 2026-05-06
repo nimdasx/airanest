@@ -1,14 +1,14 @@
 # Progress Pengerjaan — AiraNest (Web Mail Client IMAP)
 
-## Struktur Repo
+## Struktur Repo (Monorepo)
 
 ```
-airanest/
-├── rancangan-mvp-webmail-imap.md  # Dokumen rancangan lengkap
-├── PROGRESS.md                    # File ini
-├── api/                           # Subfolder backend (API + Worker + Beat)
-│   └── TAHAPAN.md                 # Detail 9 tahap pengerjaan API
-└── ui/                            # (belum dibuat, ditunda)
+airanest/                            # Satu repo git, beda folder per komponen
+├── rancangan-mvp-webmail-imap.md    # Dokumen rancangan lengkap
+├── PROGRESS.md                      # File ini
+├── api/                             # Backend (API + Worker + Beat)
+│   └── TAHAPAN.md                   # Detail 9 tahap pengerjaan API
+└── ui/                              # Frontend (belum dibuat, ditunda)
 ```
 
 ## Status per Komponen

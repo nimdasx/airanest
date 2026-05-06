@@ -7,7 +7,7 @@ Membangun web app email client yang terasa seperti Thunderbird versi web, dengan
 - Multi user
 - Setiap user bisa menambahkan beberapa akun email IMAP
 - Web-based
-- API dan UI dipisahkan ke repo/source code berbeda
+- API dan UI dipisahkan ke folder berbeda dalam satu repo (monorepo)
 - Masing-masing service bisa dibuild menjadi Docker image
 - Deployment akhir cukup dengan `docker compose`
 
@@ -278,10 +278,15 @@ Pengiriman email tetap pakai SMTP:
 - `POST /sync/run`  # admin/internal
 - `GET /sync/status`
 
-## 10. Repo split
+## 10. Struktur folder (monorepo)
 
-### Repo 1 — api
-Berisi:
+```
+airanest/
+├── api/          # Backend (FastAPI, Celery, migrations, IMAP/SMTP, auth, tests, Dockerfile)
+└── ui/           # Frontend (React, pages/views, API client, auth flow, Dockerfile)
+```
+
+### Folder `api/`
 - FastAPI app
 - Celery worker
 - database migrations
@@ -290,8 +295,7 @@ Berisi:
 - tests
 - Dockerfile
 
-### Repo 2 — ui
-Berisi:
+### Folder `ui/`
 - React app
 - pages/views
 - API client
